@@ -33,14 +33,11 @@ export async function PUT(request: NextRequest, { params }: { params: GetOnePost
         data: {
             title: body.title ?? undefined,
             content: body.content ?? undefined,
-            categoryId: body.categoryId ?? undefined,
-            category: body.category
-                ? {
-                      update: {
-                          name: body.category.name ?? undefined
-                      }
-                  }
-                : undefined
+            category: {
+                connect: {
+                    id: body.categoryId
+                }
+            }
         },
     });
     return NextResponse.json({
